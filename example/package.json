@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "confetti-explosion-react": "../confetti-explosion-react-v0.1.0.tgz",
     "react": "^18.x",
-    "react-confetti-explosion": "file:../confetti-explosion-react-0.1.0.tgz",
     "react-dom": "^18.x"
   },
   "devDependencies": {

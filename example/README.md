@@ -2,26 +2,17 @@
 
 Example app that can be used as a playground for the `ConfettiExplosion`.
 
-1. Make sure from the root directory a `tgz` file has been created (for example using `npm pack`).
+1. From the root directory:
 
-1. Reference latest confetti-explosion-react package, eg:
+    1. Compile package with `yarn run compile`
 
-```js
-"dependencies": {
-    "confetti-explosion-react": "../confetti-explosion-react-0.1.0.tgz",
-```
+    2. Create the package `tgz` file with `npm pack`
 
-1. Install dependencies from this /example directory
+3. Add the package to example project with `yarn add ../confetti-explosion-react-v<updated-version>.tgz`
 
-```bash
-$ yarn
-```
+4. Install dependencies from this /example directory `yarn`
 
-1. Run Webpack dev server
-
-```bash
-$ yarn start
-```
+5. Run Webpack dev server `yarn start`
 
 Will be served at http://localhost:8080/
 
