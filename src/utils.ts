@@ -26,6 +26,4 @@ export const rotationTransforms: Rotate3dTransform[] = [
   zAxisRotation,
 ];
 
-export const shouldBeCircle = (rotationIndex: number) => {
-  return !isEqual(rotationTransforms[rotationIndex], zAxisRotation) && coinFlip();
-};
+export const shouldBeCircle = (rotationIndex: number) => !isEqual(rotationTransforms[rotationIndex], zAxisRotation) && coinFlip();

@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/herrethan/react-confetti-explosion"
+    "url": "git+https://github.com/DercilioFontes/confetti-explosion-react"
   },
   "keywords": [
     "confetti",
@@ -34,14 +34,15 @@
   "author": "Dercilio Fontes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DercilioFontes/react-confetti-explosion/issues"
+    "url": "https://github.com/DercilioFontes/confetti-explosion-react/issues"
   },
-  "homepage": "https://github.com/DercilioFontes/react-confetti-explosion#readme",
+  "homepage": "https://github.com/DercilioFontes/confetti-explosion-react#readme",
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
+    "@emotion/serialize": "^1.1.1",
     "lodash.isequal": "^4.5.0",
     "lodash.range": "^3.2.0",
     "lodash.round": "^4.0.4",

@@ -1,6 +1,5 @@
-import { keyframes } from 'tss-react';
+import { keyframes, createMakeStyles } from 'tss-react';
 import { Keyframes } from '@emotion/serialize';
-import { createMakeStyles } from 'tss-react';
 import round from 'lodash.round';
 
 import { coinFlip, mapRange, rotate, rotationTransforms, shouldBeCircle } from './utils';
@@ -103,7 +102,7 @@ const confettoStyle = (
       '& > div': {
         width: isCircle ? size : Math.round(Math.random() * 4) + size / 2,
         height: isCircle ? size : Math.round(Math.random() * 2) + size,
-        animation: `${confettiKeyframesResult['yAxisKeyframes']} ${durationChaos}ms forwards cubic-bezier(${y1}, ${y2}, ${y3}, ${y4})`,
+        animation: `${confettiKeyframesResult.yAxisKeyframes} ${durationChaos}ms forwards cubic-bezier(${y1}, ${y2}, ${y3}, ${y4})`,
         '&:after': {
           backgroundColor: particle.color,
           animation: `${rotationKeyframes[`rotateKeyframe-${rotationIndex}`]} ${rotation}ms infinite linear`,
@@ -115,11 +114,11 @@ const confettoStyle = (
 };
 
 const { makeStyles } = createMakeStyles({
-  useTheme: () => {},
+  useTheme: () => null,
 });
 
 const useStyles = ({ particles, duration, height, width, force, particleSize }: IParticlesProps) =>
-  makeStyles<void, keyof IStyleClasses>({ name: 'ConfettiExplosion' })((theme, _params, classes) => {
+  makeStyles<void, keyof IStyleClasses>({ name: 'ConfettiExplosion' })(() => {
     const confettiKeyframesResult = confettiKeyframes(
       particles.map((particle) => particle.degree),
       height,
