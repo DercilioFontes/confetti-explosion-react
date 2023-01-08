@@ -45,7 +45,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.range": "^3.2.0",
     "lodash.round": "^4.0.4",
-    "tss-react": "^4.4.5"
+    "tss-react": "^4.5.2"
   },
   "devDependencies": {
     "@types/lodash.isequal": "^4.5.6",
