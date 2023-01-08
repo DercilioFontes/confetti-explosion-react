@@ -1,7 +1,7 @@
 {
-  "name": "react-confetti-explosion",
-  "version": "1.5.1",
-  "description": "A lightweight css-animation based confetti exploder for React",
+  "name": "confetti-explosion-react",
+  "version": "0.1.0",
+  "description": "A React lightweight css-animation based confetti exploder",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -31,12 +31,12 @@
     "react",
     "styles"
   ],
-  "author": "Ethan Herr",
+  "author": "Dercilio Fontes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/herrethan/react-confetti-explosion/issues"
+    "url": "https://github.com/DercilioFontes/react-confetti-explosion/issues"
   },
-  "homepage": "https://github.com/herrethan/react-confetti-explosion#readme",
+  "homepage": "https://github.com/DercilioFontes/react-confetti-explosion#readme",
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },

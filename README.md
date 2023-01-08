@@ -1,19 +1,27 @@
 # React Confetti Explosion
 
-[![npm version](https://img.shields.io/npm/v/react-confetti-explosion.svg?style=flat-square)](https://www.npmjs.com/package/react-confetti-explosion)
+[![npm version](https://img.shields.io/npm/v/confetti-explosion-react.svg?style=flat-square)](https://www.npmjs.com/package/confetti-explosion-react)
 
-This is inspired by [this](https://codepen.io/Gthibaud/pen/ENzXbp) beautiful and oft-used confetti which uses canvas, but equally inspired by how many bad looking CSS examples there are out there. The goal was to create a super lightweight confetti component that would not require canvas, use only CSS for animation, and could also be controlled as an explosion (rather than raining confetti), without the need to write a full-blown particle generator.
+This package is a fork from [herrethan](https://github.com/herrethan) package [react-confetti-explosion](https://www.npmjs.com/package/react-confetti-explosion) to support React 18 and to update dependencies. 
+
+From the original project:
+
+>This is inspired by [this](https://codepen.io/Gthibaud/pen/ENzXbp) beautiful and oft-used confetti which uses canvas, but equally inspired by how many bad looking CSS examples there are out there. The goal was to create a super lightweight confetti component that would not require canvas, use only CSS for animation, and could also be controlled as an explosion (rather than raining confetti), without the need to write a full-blown particle generator.
 
 Install:
 
 ```bash
-$ yarn add react-confetti-explosion
+$ npm install confetti-explosion-react
+```
+
+```bash
+$ yarn add confetti-explosion-react
 ```
 
 ## Usage
 
 ```jsx
-import ConfettiExplosion from 'react-confetti-explosion';
+import ConfettiExplosion from 'confetti-explosion-react';
 
 function App() {
   const [isExploding, setIsExploding] = React.useState(false);
@@ -88,7 +96,7 @@ To keep the library as little as possible much of the physics have been estimate
 
 ## Author
 
-[herrethan](https://github.com/herrethan)
+[DercilioFontes](https://github.com/DercilioFontes) based on [herrethan](https://github.com/herrethan) work
 
 ## License
 
