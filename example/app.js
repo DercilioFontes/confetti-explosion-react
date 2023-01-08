@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import ConfettiExplosion from 'react-confetti-explosion';
+import ConfettiExplosion from 'confetti-explosion-react';
 
 const container = {
   position: 'absolute',
