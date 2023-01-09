@@ -1,7 +1,7 @@
 {
-  "name": "react-confetti-explosion",
-  "version": "1.5.1",
-  "description": "A lightweight css-animation based confetti exploder for React",
+  "name": "confetti-explosion-react",
+  "version": "0.1.1",
+  "description": "A React lightweight css-animation based confetti exploder",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/herrethan/react-confetti-explosion"
+    "url": "git+https://github.com/DercilioFontes/confetti-explosion-react"
   },
   "keywords": [
     "confetti",
@@ -31,38 +31,44 @@
     "react",
     "styles"
   ],
-  "author": "Ethan Herr",
+  "author": "Dercilio Fontes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/herrethan/react-confetti-explosion/issues"
+    "url": "https://github.com/DercilioFontes/confetti-explosion-react/issues"
   },
-  "homepage": "https://github.com/herrethan/react-confetti-explosion#readme",
+  "homepage": "https://github.com/DercilioFontes/confetti-explosion-react#readme",
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
-    "@material-ui/styles": "^4.11.5",
-    "lodash": "^4.17.21"
+    "@emotion/react": "^11.10.5",
+    "@emotion/serialize": "^1.1.1",
+    "lodash.isequal": "^4.5.0",
+    "lodash.range": "^3.2.0",
+    "lodash.round": "^4.0.4",
+    "tss-react": "^4.5.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.168",
-    "@types/react": "^18.0.17",
-    "@typescript-eslint/eslint-plugin": "^2.3.0",
-    "@typescript-eslint/parser": "^2.3.0",
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-react-app": "^4.0.1",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.2",
-    "husky": "^3.0.0",
-    "lint-staged": "^8.1.4",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.4.0"
+    "@types/lodash.isequal": "^4.5.6",
+    "@types/lodash.range": "^3.2.7",
+    "@types/lodash.round": "^4.0.7",
+    "@types/react": "^18.0.26",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.2",
+    "pretty-quick": "^3.1.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
   },
   "directories": {
     "example": "example",

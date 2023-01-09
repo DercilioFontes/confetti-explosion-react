@@ -1,5 +1,6 @@
-import makeStyles from '@material-ui/styles/makeStyles';
-import round from 'lodash/round';
+import { keyframes, createMakeStyles } from 'tss-react';
+import { Keyframes } from '@emotion/serialize';
+import round from 'lodash.round';
 
 import { coinFlip, mapRange, rotate, rotationTransforms, shouldBeCircle } from './utils';
 
@@ -9,7 +10,7 @@ const CRAZY_PARTICLES_FREQUENCY = 0.1; // 0-1 frequency of crazy curvy unpredict
 const CRAZY_PARTICLE_CRAZINESS = 0.3; // 0-1 how crazy these crazy particles are
 const BEZIER_MEDIAN = 0.5; // utility for mid-point bezier curves, to ensure smooth motion paths
 
-export interface IStyleClasses {
+interface IStyleClasses {
   container: string;
   particle: string;
 }
@@ -29,40 +30,48 @@ interface IParticlesProps {
 }
 
 const rotationKeyframes = rotationTransforms.reduce((acc, xyz, i) => {
+  const rotateKeyframe = keyframes`
+      to {
+        transform: rotate3d(${xyz.join()}, 360deg);
+      }`;
+
   return {
     ...acc,
-    [`@keyframes rotation-${i}`]: {
-      to: {
-        transform: `rotate3d(${xyz.join()}, 360deg)`
-      }
-    }
+    [`rotateKeyframe-${i}`]: rotateKeyframe,
   };
-}, {});
+}, {} as Record<string, Keyframes>);
 
 const confettiKeyframes = (degrees: number[], height: number, width: number) => {
   const xLandingPoints = degrees.reduce((acc, degree, i) => {
     const landingPoint = mapRange(Math.abs(rotate(degree, 90) - 180), 0, 180, -width / 2, width / 2);
+    const xAxisIndexKeyframe = keyframes`
+      to {
+          transform: translateX(${landingPoint}px);
+        }`;
     return {
       ...acc,
-      [`@keyframes x-axis-${i}`]: {
-        to: {
-          transform: `translateX(${landingPoint}px)`
-        }
-      }
+      [`xAxisIndexKeyframe-${i}`]: xAxisIndexKeyframe,
     };
-  }, {});
+  }, {} as Record<string, Keyframes>);
+  const yAxisKeyframes = keyframes`
+      to {
+        transform: translateY(${height}px);
+      }`;
 
   return {
-    '@keyframes y-axis': {
-      to: {
-        transform: `translateY(${height}px)`
-      }
-    },
-    ...xLandingPoints
+    yAxisKeyframes,
+    ...xLandingPoints,
   };
 };
 
-const confettoStyle = (particle: IParticle, duration: number, force: number, size: number, i: number) => {
+const confettoStyle = (
+  particle: IParticle,
+  duration: number,
+  force: number,
+  size: number,
+  i: number,
+  confettiKeyframesResult: Record<string, Keyframes>
+) => {
   const rotation = Math.random() * (ROTATION_SPEED_MAX - ROTATION_SPEED_MIN) + ROTATION_SPEED_MIN;
   const rotationIndex = Math.round(Math.random() * (rotationTransforms.length - 1));
   const durationChaos = duration - Math.round(Math.random() * 1000);
@@ -87,60 +96,65 @@ const confettoStyle = (particle: IParticle, duration: number, force: number, siz
 
   return {
     [`&#confetti-particle-${i}`]: {
-      animation: `$x-axis-${i} ${durationChaos}ms forwards cubic-bezier(${x1}, ${x2}, ${x3}, ${x4})`,
+      animation: `${
+        confettiKeyframesResult[`xAxisIndexKeyframe-${i}`]
+      } ${durationChaos}ms forwards cubic-bezier(${x1}, ${x2}, ${x3}, ${x4})`,
       '& > div': {
         width: isCircle ? size : Math.round(Math.random() * 4) + size / 2,
         height: isCircle ? size : Math.round(Math.random() * 2) + size,
-        animation: `$y-axis ${durationChaos}ms forwards cubic-bezier(${y1}, ${y2}, ${y3}, ${y4})`,
+        animation: `${confettiKeyframesResult.yAxisKeyframes} ${durationChaos}ms forwards cubic-bezier(${y1}, ${y2}, ${y3}, ${y4})`,
         '&:after': {
           backgroundColor: particle.color,
-          animation: `$rotation-${rotationIndex} ${rotation}ms infinite linear`,
-          ...(isCircle ? { borderRadius: '50%' } : {})
-        }
-      }
-    }
+          animation: `${rotationKeyframes[`rotateKeyframe-${rotationIndex}`]} ${rotation}ms infinite linear`,
+          ...(isCircle ? { borderRadius: '50%' } : {}),
+        },
+      },
+    },
   };
 };
 
-const useStyles = ({ particles, duration, height, width, force, particleSize }: IParticlesProps) =>
-  makeStyles(
-    () => {
-      const confettiStyles = particles.reduce(
-        (acc, particle, i) => ({ ...acc, ...confettoStyle(particle, duration, force, particleSize, i) }),
-        {}
-      );
+const { makeStyles } = createMakeStyles({
+  useTheme: () => null,
+});
 
-      return {
-        ...rotationKeyframes,
-        ...confettiKeyframes(
-          particles.map(particle => particle.degree),
-          height,
-          width
-        ),
-        container: {
-          width: 0,
-          height: 0,
-          position: 'relative',
-          overflow: 'visible',
-          zIndex: 1200
+const useStyles = ({ particles, duration, height, width, force, particleSize }: IParticlesProps) =>
+  makeStyles<void, keyof IStyleClasses>({ name: 'ConfettiExplosion' })(() => {
+    const confettiKeyframesResult = confettiKeyframes(
+      particles.map((particle) => particle.degree),
+      height,
+      width
+    );
+    const confettiStyles = particles.reduce(
+      (acc, particle, i) => ({
+        ...acc,
+        ...confettoStyle(particle, duration, force, particleSize, i, confettiKeyframesResult),
+      }),
+      {}
+    );
+
+    return {
+      container: {
+        width: 0,
+        height: 0,
+        position: 'relative',
+        overflow: 'visible',
+        zIndex: 1200,
+      },
+      particle: {
+        ...confettiStyles,
+        '& > div': {
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          '&:after': {
+            content: `''`,
+            display: 'block',
+            width: '100%',
+            height: '100%',
+          },
         },
-        particle: {
-          ...confettiStyles,
-          '& > div': {
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            '&:after': {
-              content: `''`,
-              display: 'block',
-              width: '100%',
-              height: '100%'
-            }
-          }
-        }
-      };
-    },
-    { name: 'ConfettiExplosion' }
-  );
+      },
+    };
+  });
 
 export default useStyles;
